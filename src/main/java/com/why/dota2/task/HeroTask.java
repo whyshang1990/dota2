@@ -1,8 +1,8 @@
 package com.why.dota2.task;
 
-import com.why.dota2.domain.common.BaseResult;
-import com.why.dota2.domain.dto.HeroDTO;
-import com.why.dota2.domain.dto.HeroesDTO;
+import com.why.dota2.dto.BaseResult;
+import com.why.dota2.dto.HeroDTO;
+import com.why.dota2.dto.HeroesDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;

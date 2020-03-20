@@ -1,0 +1,19 @@
+# 配置服务器启动端口
+server:
+  port: 11106
+
+# debug模式配置
+debug: true
+
+# 数据库源配置
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MariaDBDialect
+  datasource:
+    url: jdbc:mariadb://39.101.202.106:3306/dota2
+    username: dota2admin
+    password: wuhaiyun
+    driver-class-name: org.mariadb.jdbc.Driver

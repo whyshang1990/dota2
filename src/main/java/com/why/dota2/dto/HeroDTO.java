@@ -1,10 +1,13 @@
-package com.why.dota2.domain.dto;
+package com.why.dota2.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class HeroDTO {
+public class HeroDTO implements Serializable {
+    private static final long serialVersionUID = -7611740355834331683L;
     private String name;
     private String id;
     @JsonProperty("localized_name")

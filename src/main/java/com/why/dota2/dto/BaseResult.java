@@ -1,4 +1,4 @@
-package com.why.dota2.domain.common;
+package com.why.dota2.dto;
 
 import lombok.Data;
 
