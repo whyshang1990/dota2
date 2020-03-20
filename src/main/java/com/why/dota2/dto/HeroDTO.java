@@ -8,8 +8,9 @@ import java.io.Serializable;
 @Data
 public class HeroDTO implements Serializable {
     private static final long serialVersionUID = -7611740355834331683L;
+
     private String name;
-    private String id;
+    private int id;
     @JsonProperty("localized_name")
     private String localizedName;
 }

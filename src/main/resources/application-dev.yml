@@ -13,7 +13,7 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MariaDBDialect
   datasource:
-    url: jdbc:mariadb://39.101.202.106:3306/dota2
+    url: jdbc:mariadb://39.101.202.106:3306/dota2?characterEncoding=utf-8
     username: dota2admin
     password: wuhaiyun
     driver-class-name: org.mariadb.jdbc.Driver

@@ -14,8 +14,8 @@ import java.io.Serializable;
 public class HeroDO implements Serializable {
     private static final long serialVersionUID = 6443345974743321782L;
     @Id
-    @Column
-    private String id;
+    @Column(nullable = false, unique = true)
+    private int id;
     @Column
     private String name;
     @Column
