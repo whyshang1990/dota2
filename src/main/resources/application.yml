@@ -1,7 +1,7 @@
 # 配置激活的环境配置文件
 spring:
   profiles:
-    active: dev
+    active: custom, dev
 
   # 当属性为null时，不将其序列化
   jackson:
