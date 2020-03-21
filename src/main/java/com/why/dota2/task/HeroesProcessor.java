@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,8 +43,12 @@ public class HeroesProcessor extends CommonApiProcessor<BaseResult<HeroesDTO>> {
             HeroesDTO heroesDTO = baseResult.getResult();
             if (heroesDTO.getStatus() == 200) {
                 List<HeroDO> heroDOList = heroesDTO.getHeroes().stream()
-                        .map(heroDTO -> EntityUtils.DTO2DO(heroDTO, HeroDO.class))
-                        .collect(Collectors.toList());
+                    .map(heroDTO -> {
+                        HeroDO heroDO = EntityUtils.DTO2DO(heroDTO, HeroDO.class);
+                        heroDO.setGmtCreated(new Date());
+                        return heroDO;
+                    })
+                    .collect(Collectors.toList());
                 heroDao.saveAll(heroDOList);
             }
         }

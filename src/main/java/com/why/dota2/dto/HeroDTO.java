@@ -10,7 +10,8 @@ public class HeroDTO implements Serializable {
     private static final long serialVersionUID = -7611740355834331683L;
 
     private String name;
-    private int id;
+    @JsonProperty("id")
+    private int heroId;
     @JsonProperty("localized_name")
     private String localizedName;
 }
