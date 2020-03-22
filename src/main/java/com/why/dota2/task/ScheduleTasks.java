@@ -15,8 +15,16 @@ public class ScheduleTasks {
     @Resource
     HeroesProcessor heroesProcessor;
 
+    @Resource
+    ItemProcessor itemProcessor;
+
     @Scheduled(fixedDelay = 360000)
     public void getHeroes() {
         heroesProcessor.process();
+    }
+
+    @Scheduled(fixedDelay = 360000)
+    public void getItems() {
+        itemProcessor.process();
     }
 }
