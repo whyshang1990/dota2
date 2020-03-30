@@ -5,15 +5,55 @@ server:
 # debug模式配置
 debug: true
 
-# 数据库源配置
+# Spring配置
 spring:
+  # spring data jpa 配置
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MariaDBDialect
+  # 数据库源配置
   datasource:
     url: jdbc:mariadb://39.101.202.106:3306/dota2?characterEncoding=utf-8
     username: dota2admin
     password: wuhaiyun
     driver-class-name: org.mariadb.jdbc.Driver
+  # kafka 配置
+  kafka:
+    # 以逗号分隔的主机：端口对列表，用于建立与Kafka群集的初始连接
+    bootstrap-servers: localhost:9092
+    producer:
+      # key，value的Serializer类
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # procedure要求leader在考虑完成请求之前收到的确认数，用于控制发送记录在服务端的持久化，其值可以为如下：
+      # acks = 0 如果设置为零，则生产者将不会等待来自服务器的任何确认，该记录将立即添加到套接字缓冲区并视为已发送。
+      # 在这种情况下，无法保证服务器已收到记录，并且重试配置将不会生效（因为客户端通常不会知道任何故障），为每条记录返回的偏移量始终设置为-1。
+      # acks = 1 这意味着leader会将记录写入其本地日志，但无需等待所有副本服务器的完全确认即可做出回应，
+      # 在这种情况下，如果leader在确认记录后立即失败，但在将数据复制到所有的副本服务器之前，则记录将会丢失。
+      # acks = all 这意味着leader将等待完整的同步副本集以确认记录，这保证了只要至少一个同步副本服务器仍然存活，记录就不会丢失，
+      # 这是最强有力的保证，这相当于acks = -1的设置。
+      # 可以设置的值为：all, -1, 0, 1
+      acks: 0
+      retries: 0
+      # 生产者可用于缓冲等待发送到服务器的记录的内存总字节数，默认值为 32 MB
+      buffer-memory: 33554432
+      # 每当多个记录被发送到同一分区时，生产者将尝试将记录一起批量处理为更少的请求，默认值为 16 KB
+      batch-size: 16384
+    consumer:
+      # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
+      auto-commit-interval: 1S
+      # 该属性指定了消费者在读取一个没有偏移量的分区或者偏移量无效的情况下该作何处理：
+      # latest（默认值）在偏移量无效的情况下，消费者将从最新的记录开始读取数据（在消费者启动之后生成的记录）
+      # earliest ：在偏移量无效的情况下，消费者将从起始位置读取分区的记录
+      auto-offset-reset: earliest
+      # 是否自动提交偏移量，默认值是true,为了避免出现重复数据和数据丢失，可以把它设置为false,然后手动提交偏移量
+      enable-auto-commit: true
+      # 键的反序列化方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # 值的反序列化方式
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      # 在侦听器容器中运行的线程数。
+      concurrency: 5
