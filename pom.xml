@@ -19,6 +19,8 @@
         <lombok.version>1.18.10</lombok.version>
         <mariadb.driver.version>2.4.4</mariadb.driver.version>
         <common.lang3.version>3.9</common.lang3.version>
+        <flink.version>1.9.2</flink.version>
+        <scala.binary.version>2.12</scala.binary.version>
         <java.version>1.8</java.version>
     </properties>
 
@@ -53,6 +55,25 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- flink相关 -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-core</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
         <!-- 自动插入编辑器和构建工具 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

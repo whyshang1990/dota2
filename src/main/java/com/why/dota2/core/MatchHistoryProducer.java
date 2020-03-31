@@ -12,6 +12,6 @@ public class MatchHistoryProducer {
     KafkaTemplate<String, String> kafkaTemplate;
 
     public void produce(String message) {
-        kafkaTemplate.send(KafkaConsts.MATCH_HISTORY_TOPIC, message);
+        kafkaTemplate.send(KafkaConsts.STEAM_MATCH_HISTORY, message);
     }
 }

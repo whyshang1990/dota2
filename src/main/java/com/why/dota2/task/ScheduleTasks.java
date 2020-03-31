@@ -1,7 +1,7 @@
 package com.why.dota2.task;
 
 import com.why.dota2.constant.KafkaConsts;
-import com.why.dota2.util.JsonUtils;
+import com.why.dota2.core.ProcessEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -30,6 +30,9 @@ public class ScheduleTasks {
     @Resource
     KafkaTemplate<String, String> kafkaTemplate;
 
+    @Resource
+    ProcessEngine processEngine;
+
     // @Scheduled(fixedDelay = 360000)
     public void getHeroes() {
         heroesProcessor.process();
@@ -48,6 +51,15 @@ public class ScheduleTasks {
     @Scheduled(fixedDelay = 30000)
     protected void kafkaTest() {
         log.info("Kafka发送消息");
-        kafkaTemplate.send(KafkaConsts.MATCH_HISTORY_TOPIC, "test: " + new Date().getTime());
+        kafkaTemplate.send(KafkaConsts.STEAM_MATCH_HISTORY, "test: " + new Date().getTime());
+    }
+
+    public void engineTest() {
+        try {
+            processEngine.runFlinkJob();
+        } catch (Exception e) {
+            log.info("引擎异常：{}", e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
