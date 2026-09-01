@@ -17,7 +17,7 @@
 
     <properties>
         <lombok.version>1.18.10</lombok.version>
-        <mariadb.driver.version>2.4.4</mariadb.driver.version>
+        <mariadb.driver.version>2.7.14</mariadb.driver.version>
         <common.lang3.version>3.9</common.lang3.version>
     </properties>
 
